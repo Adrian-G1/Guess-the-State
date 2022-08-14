@@ -18,10 +18,9 @@ while len(guessed_states) < 50:
 
 # States to learn
     if answer_state == "Exit":
-        with open("states_to_learn.csv", mode='w') as file:
-            for state in all_states:
-                if state not in guessed_states:
-                    file.write(f"{state}\n")
+        missing_states = [state for state in all_states if state not in guessed_states]
+        new_data = pandas.DataFrame(missing_states)
+        new_data.to_csv("states_to_learn.csv")
         break
 
 # Check if answer_state in State column
